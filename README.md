@@ -22,10 +22,10 @@
 
 ### აპლიკაციის გასაშვებად გაუშვით ბრძანებები
 
-git clone https://github.com/tvani2/transfers.git
-cd transfers
-mvn clean install
-mvn spring-boot:run
+- git clone https://github.com/tvani2/transfers.git
+- cd transfers
+- mvn clean install
+- mvn spring-boot:run
 
 ## ტესტები
 პროექტში შედის ტესტები, რომლებიც სხვადასხვა ტრანსფერის რაოდენობისა და საერთო ღირებულების/ წონის მიხედვით ითვლის შედეგებს. 
