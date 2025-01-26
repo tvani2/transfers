@@ -13,16 +13,73 @@
     - შერჩეული ტრანსფერების რაოდენობა
 
 ## ინსტალაცია
-1. დააინსტალირეთ Maven და ჩამოტვირთეთ პროექტი.
-2. კონფიგურაცია უნდა იყოს სწორი Spring Boot პროექტისთვის.
-3. გაუშვით
+### საჭირო პრერეკვიზიტები
 
-```bash
+აპლიკაციის გაშვების წინ, დარწმუნდით რომ გაქვთ:
+- Java 11+
+- [Maven](https://maven.apache.org/)
+- [Spring Boot](https://spring.io/projects/spring-boot) 
+
+### აპლიკაციის გასაშვებად გაუშვით ბრძანებები
+
+git clone https://github.com/tvani2/transfers.git
+cd transfers
+mvn clean install
 mvn spring-boot:run
-```
 
 ## ტესტები
 პროექტში შედის ტესტები, რომლებიც სხვადასხვა ტრანსფერის რაოდენობისა და საერთო ღირებულების/ წონის მიხედვით ითვლის შედეგებს. 
+
+API Endpoints
+POST /api/transfers/calculate
+ეს endpoint ითვლის ოპტიმალურ ტრანსფერებს, მაქსიმალური წონის ლიმიტის მიხედვით.
+{
+  "maxWeight": 15,
+  "availableTransfers": [
+    { "weight": 5, "cost": 10 },
+    { "weight": 10, "cost": 20 },
+    { "weight": 3, "cost": 5 },
+    { "weight": 8, "cost": 15 }
+  ]
+}
+
+maxWeight: მაქსიმალური წონის ლიმიტი ტრანსფერებისთვის.
+availableTransfers: ხელმისაწვდომი ტრანსფერების სია, სადაც თითოეული ტრანსფერი შეიცავს weight და cost.
+პასუხი:
+{
+  "totalCost": 30,
+  "totalWeight": 15,
+  "selectedTransfers": [
+    { "weight": 5, "cost": 10 },
+    { "weight": 10, "cost": 20 }
+  ]
+}
+
+totalCost: არჩეულ ტრანსფერების საერთო ღირებულება.
+totalWeight: არჩეულ ტრანსფერების საერთო წონა.
+selectedTransfers: არჩეულ ტრანსფერების სია, რომლებიც შევა maxWeight ფარგლებში.
+
+Example CURL Requests and Responses
+მოთხოვნა:
+{
+  "maxWeight": 15,
+  "availableTransfers": [
+    { "weight": 5, "cost": 10 },
+    { "weight": 10, "cost": 20 },
+    { "weight": 3, "cost": 5 },
+    { "weight": 8, "cost": 15 }
+  ]
+}'
+
+პასუხი:
+{
+  "totalCost": 30,
+  "totalWeight": 15,
+  "selectedTransfers": [
+    { "weight": 5, "cost": 10 },
+    { "weight": 10, "cost": 20 }
+  ]
+}
 
 ## დამხმარე ტექნოლოგიები
 - **Spring Boot**
