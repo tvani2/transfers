@@ -15,16 +15,18 @@ public class TransferController {
 
     @PostMapping("/calculate")
     public TransferService.Result calculateTransfers(@RequestBody Request request) {
-        return transferService.calculateOptimalTransfers(request.getAvailableTransfers(), request.getMaxWeight());
+        return transferService.calculateOptimalTransfers(request.getAvailableTransfers(), request.getMaxWeight(), request.getBoxWeight());
     }
 
     public static class Request {
-        private int maxWeight;
+        private int maxWeight, boxWeight;
         private List<Transfer> availableTransfers;
 
         public int getMaxWeight() {
             return maxWeight;
         }
+
+        public int getBoxWeight() { return boxWeight; }
 
         public List<Transfer> getAvailableTransfers() {
             return availableTransfers;
